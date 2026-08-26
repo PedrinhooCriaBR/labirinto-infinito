@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Labirinto - Fases Infinitas</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #111827, #1e3a5f);
+            color: white;
+            min-height: 100vh;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            padding: 20px;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        .painel {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+
+            margin-bottom: 20px;
+        }
+
+        .info {
+            background: #1f2937;
+            padding: 12px 18px;
+            border-radius: 10px;
+
+            border: 2px solid #374151;
+            font-weight: bold;
+        }
+
+        button {
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+
+            cursor: pointer;
+
+            color: white;
+            font-weight: bold;
+            font-size: 16px;
+
+            transition: 0.2s;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+        }
+
+        #comecar {
+            background: #22c55e;
+        }
+
+        #resetar {
+            background: #ef4444;
+        }
+
+        #labirinto {
+
+            display: grid;
+
+            background: white;
+
+            border: 5px solid white;
+
+            max-width: 90vw;
+            max-height: 70vh;
+
+        }
+
+        .celula {
+
+            width: 35px;
+            height: 35px;
+
+        }
+
+        .parede {
+
+            background: #111827;
+
+        }
+
+        .caminho {
+
+            background: #e5e7eb;
+
+        }
+
+        .jogador {
+
+            background: #3b82f6;
+
+            border-radius: 50%;
+
+            border: 6px solid #e5e7eb;
+
+        }
+
+        .final {
+
+            background: #facc15;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            font-size: 20px;
+
+        }
+
+        #mensagem {
+
+            margin-top: 20px;
+
+            font-size: 22px;
+
+            text-align: center;
+
+            min-height: 30px;
+
+        }
+
+        .controles {
+
+            margin-top: 10px;
+
+            color: #d1d5db;
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <h1>🌀 Labirinto Infinito</h1>
+
+
+    <div class="painel">
+
+        <div class="info">
+            🏆 Fase: <span id="fase">1</span>
+        </div>
+
+
+        <div class="info">
+            ⏱ Tempo: <span id="tempo">0</span>s
+        </div>
+
+
+        <div class="info">
+            🥇 Recorde: <span id="recorde">--</span>
+        </div>
+
+
+        <button id="comecar">
+            ▶ Começar
+        </button>
+
+
+        <button id="resetar">
+            ↻ Resetar
+        </button>
+
+    </div>
+
+
+    <div id="labirinto"></div>
+
+
+    <div class="controles">
+
+        Use WASD ou as setas do teclado
+
+    </div>
+
+
+    <div id="mensagem"></div>
+
+
+
+    <script>
+
+        const labirinto =
+            document.getElementById("labirinto");
+
+
+        let fase = 1;
+
+        let tamanho = 9;
+
+        let mapa = [];
+
+
+        let jogador = {
+
+            linha: 1,
+
+            coluna: 1
+
+        };
+
+
+        let final = {
+
+            linha: 0,
+
+            coluna: 0
+
+        };
+
+
+        let jogoAtivo = false;
+
+        let tempo = 0;
+
+        let cronometro;
+
+
+        let recorde =
+            localStorage.getItem("recordeLabirinto");
+
+
+        if (recorde) {
+
+            document
+                .getElementById("recorde")
+                .textContent = recorde + "s";
+
+        }
+
+
+
+        // =========================
+        // GERAR LABIRINTO
+        // =========================
+
+
+        function gerarLabirinto() {
+
+
+            mapa = [];
+
+
+            // Cria todas as paredes
+
+
+            for (let linha = 0; linha < tamanho; linha++) {
+
+                mapa[linha] = [];
+
+
+                for (let coluna = 0; coluna < tamanho; coluna++) {
+
+                    mapa[linha][coluna] = 1;
+
+                }
+
+            }
+
+
+
+            // Começa no jogador
+
+
+            function criarCaminho(linha, coluna) {
+
+
+                mapa[linha][coluna] = 0;
+
+
+                const direcoes = [
+
+                    [-2, 0],
+
+                    [2, 0],
+
+                    [0, -2],
+
+                    [0, 2]
+
+                ];
+
+
+
+                // Mistura as direções
+
+
+                direcoes.sort(() => Math.random() - 0.5);
+
+
+
+                for (let direcao of direcoes) {
+
+
+                    const novaLinha =
+                        linha + direcao[0];
+
+
+                    const novaColuna =
+                        coluna + direcao[1];
+
+
+
+                    if (
+
+                        novaLinha > 0 &&
+
+                        novaLinha < tamanho - 1 &&
+
+                        novaColuna > 0 &&
+
+                        novaColuna < tamanho - 1 &&
+
+                        mapa[novaLinha][novaColuna] === 1
+
+                    ) {
+
+
+                        mapa[novaLinha][novaColuna] = 0;
+
+
+                        mapa
+                            [linha + direcao[0] / 2]
+                            [coluna + direcao[1] / 2] = 0;
+
+
+                        criarCaminho(
+                            novaLinha,
+                            novaColuna
+                        );
+
+                    }
+
+                }
+
+            }
+
+
+
+            criarCaminho(1, 1);
+
+
+
+            jogador.linha = 1;
+
+            jogador.coluna = 1;
+
+
+
+            // Define o final
+
+
+            final.linha = tamanho - 2;
+
+            final.coluna = tamanho - 2;
+
+
+
+            // Garante que o final seja caminho
+
+
+            mapa[final.linha][final.coluna] = 0;
+
+
+            desenharLabirinto();
+
+        }
+
+
+
+        // =========================
+        // DESENHAR LABIRINTO
+        // =========================
+
+
+        function desenharLabirinto() {
+
+
+            labirinto.innerHTML = "";
+
+
+            labirinto.style.gridTemplateColumns =
+                `repeat(${tamanho}, 35px)`;
+
+
+            for (let linha = 0; linha < tamanho; linha++) {
+
+
+                for (let coluna = 0; coluna < tamanho; coluna++) {
+
+
+                    const celula =
+                        document.createElement("div");
+
+
+                    celula.classList.add("celula");
+
+
+
+                    if (mapa[linha][coluna] === 1) {
+
+                        celula.classList.add("parede");
+
+                    }
+
+                    else {
+
+                        celula.classList.add("caminho");
+
+                    }
+
+
+
+                    // Jogador
+
+
+                    if (
+
+                        linha === jogador.linha &&
+
+                        coluna === jogador.coluna
+
+                    ) {
+
+                        celula.classList.add("jogador");
+
+                    }
+
+
+
+                    // Final
+
+
+                    if (
+
+                        linha === final.linha &&
+
+                        coluna === final.coluna
+
+                    ) {
+
+                        celula.classList.add("final");
+
+                        celula.innerHTML = "🏁";
+
+                    }
+
+
+
+                    labirinto.appendChild(celula);
+
+                }
+
+            }
+
+        }
+
+
+
+        // =========================
+        // COMEÇAR JOGO
+        // =========================
+
+
+        function comecarJogo() {
+
+
+            if (jogoAtivo) return;
+
+
+            jogoAtivo = true;
+
+
+            document
+                .getElementById("mensagem")
+                .textContent =
+                "Chegue até a bandeira!";
+
+
+
+            cronometro = setInterval(() => {
+
+
+                tempo++;
+
+
+                document
+                    .getElementById("tempo")
+                    .textContent = tempo;
+
+
+            }, 1000);
+
+        }
+
+
+
+        // =========================
+        // MOVIMENTO
+        // =========================
+
+
+        function mover(dLinha, dColuna) {
+
+
+            if (!jogoAtivo) return;
+
+
+            const novaLinha =
+                jogador.linha + dLinha;
+
+
+            const novaColuna =
+                jogador.coluna + dColuna;
+
+
+
+            // Limite do mapa
+
+
+            if (
+
+                novaLinha < 0 ||
+
+                novaLinha >= tamanho ||
+
+                novaColuna < 0 ||
+
+                novaColuna >= tamanho
+
+            ) {
+
+                return;
+
+            }
+
+
+
+            // Parede
+
+
+            if (
+
+                mapa[novaLinha][novaColuna] === 1
+
+            ) {
+
+                return;
+
+            }
+
+
+
+            jogador.linha =
+                novaLinha;
+
+
+            jogador.coluna =
+                novaColuna;
+
+
+
+            desenharLabirinto();
+
+
+            verificarVitoria();
+
+        }
+
+
+
+        // =========================
+        // VITÓRIA
+        // =========================
+
+
+        function verificarVitoria() {
+
+
+            if (
+
+                jogador.linha === final.linha &&
+
+                jogador.coluna === final.coluna
+
+            ) {
+
+
+                jogoAtivo = false;
+
+
+                document
+                    .getElementById("mensagem")
+                    .textContent =
+                    "🎉 Fase " + fase +
+                    " concluída!";
+
+
+                setTimeout(proximaFase, 1500);
+
+            }
+
+        }
+
+
+
+        // =========================
+        // PRÓXIMA FASE
+        // =========================
+
+
+        function proximaFase() {
+
+
+            fase++;
+
+
+
+            // Aumenta o tamanho a cada fase
+
+
+            tamanho += 2;
+
+
+
+            // Limite máximo para não ficar gigante
+
+
+            if (tamanho > 25) {
+
+                tamanho = 25;
+
+            }
+
+
+
+            document
+                .getElementById("fase")
+                .textContent = fase;
+
+
+
+            gerarLabirinto();
+
+
+
+            jogoAtivo = true;
+
+
+
+            document
+                .getElementById("mensagem")
+                .textContent =
+                "🔥 Fase " + fase +
+                "! Agora ficou mais difícil!";
+
+        }
+
+
+
+        // =========================
+        // RESETAR
+        // =========================
+
+
+        function resetarJogo() {
+
+
+            clearInterval(cronometro);
+
+
+            jogoAtivo = false;
+
+
+            fase = 1;
+
+            tamanho = 9;
+
+            tempo = 0;
+
+
+
+            document
+                .getElementById("tempo")
+                .textContent = "0";
+
+
+            document
+                .getElementById("fase")
+                .textContent = "1";
+
+
+            gerarLabirinto();
+
+
+
+            document
+                .getElementById("mensagem")
+                .textContent =
+                "Clique em Começar!";
+
+        }
+
+
+
+        // =========================
+        // TECLADO
+        // =========================
+
+
+        document.addEventListener(
+
+            "keydown",
+
+            function(event) {
+
+
+                const tecla =
+                    event.key.toLowerCase();
+
+
+
+                if (
+
+                    tecla === "arrowup" ||
+
+                    tecla === "w"
+
+                ) {
+
+                    mover(-1, 0);
+
+                }
+
+
+
+                if (
+
+                    tecla === "arrowdown" ||
+
+                    tecla === "s"
+
+                ) {
+
+                    mover(1, 0);
+
+                }
+
+
+
+                if (
+
+                    tecla === "arrowleft" ||
+
+                    tecla === "a"
+
+                ) {
+
+                    mover(0, -1);
+
+                }
+
+
+
+                if (
+
+                    tecla === "arrowright" ||
+
+                    tecla === "d"
+
+                ) {
+
+                    mover(0, 1);
+
+                }
+
+            }
+
+        );
+
+
+
+        // BOTÕES
+
+
+        document
+            .getElementById("comecar")
+            .addEventListener(
+                "click",
+                comecarJogo
+            );
+
+
+
+        document
+            .getElementById("resetar")
+            .addEventListener(
+                "click",
+                resetarJogo
+            );
+
+
+
+        // Cria a primeira fase
+
+
+        gerarLabirinto();
+
+
+        document
+            .getElementById("mensagem")
+            .textContent =
+            "Clique em Começar para jogar!";
+
+
+    </script>
+
+</body>
+
+</html>
