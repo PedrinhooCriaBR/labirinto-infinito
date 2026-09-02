@@ -1,143 +1,549 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
     <title>Labirinto Infinito</title>
 
     <style>
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: Arial, sans-serif;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
             background: linear-gradient(135deg, #111827, #1e3a5f);
             color: white;
+
             min-height: 100vh;
+            min-height: 100dvh;
+
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            padding: 20px;
+
+            padding: 15px;
+
+            overflow-x: hidden;
         }
+
+
+        /* =========================
+           TÍTULO
+        ========================= */
 
         h1 {
-            margin-bottom: 20px;
+            margin: 10px 0 15px;
+            text-align: center;
+            font-size: clamp(24px, 5vw, 38px);
         }
+
+
+        /* =========================
+           PAINEL
+        ========================= */
 
         .painel {
+
             display: flex;
-            gap: 10px;
+
+            gap: 8px;
+
             flex-wrap: wrap;
+
             justify-content: center;
-            margin-bottom: 20px;
+
+            width: 100%;
+
+            max-width: 900px;
+
+            margin-bottom: 15px;
         }
+
 
         .info {
+
             background: #1f2937;
-            padding: 12px 18px;
+
+            padding: 10px 15px;
+
             border-radius: 10px;
+
             border: 2px solid #374151;
+
             font-weight: bold;
+
+            font-size: clamp(14px, 3vw, 18px);
         }
+
 
         button {
+
             border: none;
-            padding: 12px 20px;
-            border-radius: 8px;
+
+            border-radius: 10px;
+
             cursor: pointer;
+
             color: white;
+
             font-weight: bold;
+
             font-size: 16px;
-            transition: 0.2s;
+
+            transition: 0.15s;
+
+            touch-action: manipulation;
+
         }
 
-        button:hover {
-            transform: scale(1.05);
+
+        button:active {
+
+            transform: scale(0.92);
+
         }
+
 
         #comecar {
+
             background: #22c55e;
+
+            padding: 10px 18px;
+
         }
+
 
         #resetar {
+
             background: #ef4444;
+
+            padding: 10px 18px;
+
         }
+
+
+        /* =========================
+           ÁREA DO LABIRINTO
+        ========================= */
+
+        #areaLabirinto {
+
+            width: 100%;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            overflow: hidden;
+
+        }
+
 
         #labirinto {
+
             display: grid;
+
             background: white;
-            border: 5px solid white;
-            max-width: 90vw;
-            max-height: 70vh;
+
+            border: 4px solid white;
+
+            max-width: 92vw;
+
+            max-height: 60vh;
+
+            max-height: 60dvh;
+
         }
+
 
         .celula {
+
             width: 35px;
+
             height: 35px;
+
         }
+
 
         .parede {
+
             background: #111827;
+
         }
+
 
         .caminho {
+
             background: #e5e7eb;
+
         }
+
 
         .jogador {
+
             background: #3b82f6;
+
             border-radius: 50%;
+
             border: 6px solid #e5e7eb;
+
         }
+
 
         .final {
+
             background: #facc15;
+
             display: flex;
+
             align-items: center;
+
             justify-content: center;
+
             font-size: 20px;
+
         }
+
+
+        /* =========================
+           MENSAGEM
+        ========================= */
 
         #mensagem {
-            margin-top: 20px;
-            font-size: 22px;
+
+            margin-top: 12px;
+
+            font-size: clamp(16px, 4vw, 22px);
+
             text-align: center;
+
             min-height: 30px;
+
+            font-weight: bold;
+
         }
 
+
         .controles {
-            margin-top: 10px;
+
+            margin-top: 5px;
+
             color: #d1d5db;
+
+            text-align: center;
+
+            font-size: 14px;
+
         }
+
+
+        /* =========================
+           CONTROLES DO CELULAR
+        ========================= */
+
+        #controlesMobile {
+
+            display: none;
+
+            margin-top: 15px;
+
+            width: 190px;
+
+            height: 190px;
+
+            position: relative;
+
+        }
+
+
+        .botaoMovimento {
+
+            position: absolute;
+
+            width: 60px;
+
+            height: 60px;
+
+            background: #2563eb;
+
+            border: 3px solid #60a5fa;
+
+            border-radius: 15px;
+
+            font-size: 28px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            user-select: none;
+
+        }
+
+
+        .botaoMovimento:active {
+
+            background: #1d4ed8;
+
+            transform: scale(0.9);
+
+        }
+
+
+        #cima {
+
+            top: 0;
+
+            left: 65px;
+
+        }
+
+
+        #baixo {
+
+            bottom: 0;
+
+            left: 65px;
+
+        }
+
+
+        #esquerda {
+
+            left: 0;
+
+            top: 65px;
+
+        }
+
+
+        #direita {
+
+            right: 0;
+
+            top: 65px;
+
+        }
+
+
+        /* =========================
+           CELULAR
+        ========================= */
+
+        @media (max-width: 700px) {
+
+            body {
+
+                padding: 10px;
+
+                justify-content: flex-start;
+
+            }
+
+
+            h1 {
+
+                margin-top: 5px;
+
+                margin-bottom: 10px;
+
+            }
+
+
+            .painel {
+
+                gap: 6px;
+
+                margin-bottom: 10px;
+
+            }
+
+
+            .info {
+
+                padding: 8px 10px;
+
+                font-size: 14px;
+
+            }
+
+
+            #comecar,
+            #resetar {
+
+                padding: 8px 12px;
+
+                font-size: 14px;
+
+            }
+
+
+            #labirinto {
+
+                max-width: 94vw;
+
+                max-height: 50vh;
+
+                max-height: 50dvh;
+
+            }
+
+
+            .controles {
+
+                display: none;
+
+            }
+
+
+            #controlesMobile {
+
+                display: block;
+
+            }
+
+        }
+
+
+        /* =========================
+           CELULAR DEITADO
+        ========================= */
+
+        @media (max-width: 900px) and (orientation: landscape) {
+
+            body {
+
+                padding: 5px;
+
+            }
+
+
+            h1 {
+
+                font-size: 22px;
+
+                margin: 2px;
+
+            }
+
+
+            .painel {
+
+                margin-bottom: 5px;
+
+            }
+
+
+            #labirinto {
+
+                max-height: 48vh;
+
+                max-height: 48dvh;
+
+            }
+
+
+            #controlesMobile {
+
+                width: 130px;
+
+                height: 130px;
+
+                margin-top: 5px;
+
+            }
+
+
+            .botaoMovimento {
+
+                width: 42px;
+
+                height: 42px;
+
+                font-size: 20px;
+
+            }
+
+
+            #cima {
+
+                left: 44px;
+
+            }
+
+
+            #baixo {
+
+                left: 44px;
+
+            }
+
+
+            #esquerda {
+
+                top: 44px;
+
+            }
+
+
+            #direita {
+
+                top: 44px;
+
+            }
+
+        }
+
     </style>
+
 </head>
+
 
 <body>
 
+
     <h1>🌀 Labirinto Infinito</h1>
+
+
+    <!-- =========================
+         PAINEL
+    ========================= -->
 
     <div class="painel">
 
         <div class="info">
-            🏆 Fase: <span id="fase">1</span>
+            🏆 Fase:
+            <span id="fase">1</span>
         </div>
 
-        <div class="info">
-            ⏱ Tempo: <span id="tempo">0</span>s
-        </div>
 
         <div class="info">
-            🥇 Recorde: <span id="recorde">--</span>
+            ⏱ Tempo:
+            <span id="tempo">0</span>s
         </div>
+
+
+        <div class="info">
+            🥇 Recorde:
+            <span id="recorde">--</span>
+        </div>
+
 
         <button id="comecar">
             ▶ Começar
         </button>
+
 
         <button id="resetar">
             ↻ Resetar
@@ -145,39 +551,113 @@
 
     </div>
 
-    <div id="labirinto"></div>
+
+    <!-- =========================
+         LABIRINTO
+    ========================= -->
+
+    <div id="areaLabirinto">
+
+        <div id="labirinto"></div>
+
+    </div>
+
 
     <div class="controles">
-        Use WASD ou as setas do teclado
+
+        PC: use WASD ou as setas do teclado
+
     </div>
+
+
+    <!-- =========================
+         CONTROLES MOBILE
+    ========================= -->
+
+    <div id="controlesMobile">
+
+        <button
+            class="botaoMovimento"
+            id="cima">
+            ▲
+        </button>
+
+
+        <button
+            class="botaoMovimento"
+            id="esquerda">
+            ◀
+        </button>
+
+
+        <button
+            class="botaoMovimento"
+            id="direita">
+            ▶
+        </button>
+
+
+        <button
+            class="botaoMovimento"
+            id="baixo">
+            ▼
+        </button>
+
+    </div>
+
 
     <div id="mensagem"></div>
 
+
     <script>
 
-        const labirinto = document.getElementById("labirinto");
+
+        // =========================
+        // ELEMENTOS
+        // =========================
+
+        const labirinto =
+            document.getElementById("labirinto");
+
+
+        // =========================
+        // VARIÁVEIS
+        // =========================
 
         let fase = 1;
+
         let tamanho = 9;
+
         let mapa = [];
 
+
         let jogador = {
+
             linha: 1,
+
             coluna: 1
+
         };
 
+
         let final = {
+
             linha: 0,
+
             coluna: 0
+
         };
+
 
         let jogoAtivo = false;
 
+
         let tempo = 0;
+
 
         let cronometro = null;
 
-        // Controla se o cronômetro já começou
+
         let cronometroIniciado = false;
 
 
@@ -186,13 +666,17 @@
         // =========================
 
         let recorde =
-            localStorage.getItem("recordeLabirinto");
+            localStorage.getItem(
+                "recordeLabirinto"
+            );
+
 
         if (recorde) {
 
             document
                 .getElementById("recorde")
-                .textContent = recorde + "s";
+                .textContent =
+                recorde + "s";
 
         }
 
@@ -203,13 +687,26 @@
 
         function gerarLabirinto() {
 
+
             mapa = [];
 
-            for (let linha = 0; linha < tamanho; linha++) {
+
+            // Cria paredes
+
+            for (
+                let linha = 0;
+                linha < tamanho;
+                linha++
+            ) {
 
                 mapa[linha] = [];
 
-                for (let coluna = 0; coluna < tamanho; coluna++) {
+
+                for (
+                    let coluna = 0;
+                    coluna < tamanho;
+                    coluna++
+                ) {
 
                     mapa[linha][coluna] = 1;
 
@@ -218,48 +715,87 @@
             }
 
 
-            function criarCaminho(linha, coluna) {
+            // Cria caminhos
+
+            function criarCaminho(
+                linha,
+                coluna
+            ) {
+
 
                 mapa[linha][coluna] = 0;
 
+
                 const direcoes = [
+
                     [-2, 0],
+
                     [2, 0],
+
                     [0, -2],
+
                     [0, 2]
+
                 ];
 
 
+                // Embaralha
+
                 direcoes.sort(
-                    () => Math.random() - 0.5
+                    () =>
+                        Math.random() - 0.5
                 );
 
 
-                for (let direcao of direcoes) {
+                for (
+                    let direcao of direcoes
+                ) {
+
 
                     const novaLinha =
-                        linha + direcao[0];
+                        linha +
+                        direcao[0];
+
 
                     const novaColuna =
-                        coluna + direcao[1];
+                        coluna +
+                        direcao[1];
 
 
                     if (
 
                         novaLinha > 0 &&
-                        novaLinha < tamanho - 1 &&
+
+                        novaLinha <
+                        tamanho - 1 &&
+
                         novaColuna > 0 &&
-                        novaColuna < tamanho - 1 &&
-                        mapa[novaLinha][novaColuna] === 1
+
+                        novaColuna <
+                        tamanho - 1 &&
+
+                        mapa[
+                            novaLinha
+                        ][
+                            novaColuna
+                        ] === 1
 
                     ) {
 
-                        mapa[novaLinha][novaColuna] = 0;
 
                         mapa[
-                            linha + direcao[0] / 2
+                            novaLinha
                         ][
-                            coluna + direcao[1] / 2
+                            novaColuna
+                        ] = 0;
+
+
+                        mapa[
+                            linha +
+                            direcao[0] / 2
+                        ][
+                            coluna +
+                            direcao[1] / 2
                         ] = 0;
 
 
@@ -278,17 +814,82 @@
             criarCaminho(1, 1);
 
 
+            // Jogador
+
             jogador.linha = 1;
+
             jogador.coluna = 1;
 
 
-            final.linha = tamanho - 2;
-            final.coluna = tamanho - 2;
+            // Final
 
-            mapa[final.linha][final.coluna] = 0;
+            final.linha =
+                tamanho - 2;
+
+            final.coluna =
+                tamanho - 2;
+
+
+            mapa[
+                final.linha
+            ][
+                final.coluna
+            ] = 0;
 
 
             desenharLabirinto();
+
+        }
+
+
+        // =========================
+        // CALCULAR TAMANHO
+        // =========================
+
+        function calcularTamanhoCelula() {
+
+
+            const largura =
+                window.innerWidth;
+
+
+            const altura =
+                window.innerHeight;
+
+
+            // Espaço disponível
+
+            let tamanhoMaximo =
+                Math.min(
+                    largura * 0.90,
+                    altura * 0.50
+                );
+
+
+            let tamanhoCelula =
+                Math.floor(
+                    tamanhoMaximo /
+                    tamanho
+                );
+
+
+            // Limites
+
+            if (tamanhoCelula > 35) {
+
+                tamanhoCelula = 35;
+
+            }
+
+
+            if (tamanhoCelula < 12) {
+
+                tamanhoCelula = 12;
+
+            }
+
+
+            return tamanhoCelula;
 
         }
 
@@ -299,61 +900,117 @@
 
         function desenharLabirinto() {
 
+
             labirinto.innerHTML = "";
 
+
+            const tamanhoCelula =
+                calcularTamanhoCelula();
+
+
             labirinto.style.gridTemplateColumns =
-                `repeat(${tamanho}, 35px)`;
+                `repeat(${tamanho}, ${tamanhoCelula}px)`;
 
 
-            for (let linha = 0; linha < tamanho; linha++) {
+            for (
+                let linha = 0;
+                linha < tamanho;
+                linha++
+            ) {
 
-                for (let coluna = 0; coluna < tamanho; coluna++) {
+
+                for (
+                    let coluna = 0;
+                    coluna < tamanho;
+                    coluna++
+                ) {
+
 
                     const celula =
-                        document.createElement("div");
+                        document.createElement(
+                            "div"
+                        );
 
 
-                    celula.classList.add("celula");
+                    celula.classList.add(
+                        "celula"
+                    );
 
 
-                    if (mapa[linha][coluna] === 1) {
+                    celula.style.width =
+                        tamanhoCelula + "px";
 
-                        celula.classList.add("parede");
 
-                    } else {
+                    celula.style.height =
+                        tamanhoCelula + "px";
 
-                        celula.classList.add("caminho");
+
+                    // Parede
+
+                    if (
+                        mapa[linha][coluna]
+                        === 1
+                    ) {
+
+                        celula.classList.add(
+                            "parede"
+                        );
 
                     }
 
+                    else {
+
+                        celula.classList.add(
+                            "caminho"
+                        );
+
+                    }
+
+
+                    // Jogador
 
                     if (
 
-                        linha === jogador.linha &&
-                        coluna === jogador.coluna
+                        linha ===
+                        jogador.linha &&
+
+                        coluna ===
+                        jogador.coluna
 
                     ) {
 
-                        celula.classList.add("jogador");
+                        celula.classList.add(
+                            "jogador"
+                        );
 
                     }
 
+
+                    // Final
 
                     if (
 
-                        linha === final.linha &&
-                        coluna === final.coluna
+                        linha ===
+                        final.linha &&
+
+                        coluna ===
+                        final.coluna
 
                     ) {
 
-                        celula.classList.add("final");
+                        celula.classList.add(
+                            "final"
+                        );
 
-                        celula.innerHTML = "🏁";
+                        celula.innerHTML =
+                            "🏁";
 
                     }
 
 
-                    labirinto.appendChild(celula);
+                    labirinto.appendChild(
+                        celula
+                    );
 
                 }
 
@@ -363,43 +1020,62 @@
 
 
         // =========================
-        // COMEÇAR JOGO
+        // COMEÇAR
         // =========================
 
         function comecarJogo() {
 
+
             if (jogoAtivo) return;
+
 
             jogoAtivo = true;
 
+
             document
-                .getElementById("mensagem")
+                .getElementById(
+                    "mensagem"
+                )
                 .textContent =
-                "Clique em uma seta ou WASD para começar a andar!";
+                "Use os controles para andar!";
+
+
+            // IMPORTANTE:
+            // O cronômetro NÃO começa aqui.
 
         }
 
 
         // =========================
-        // INICIAR CRONÔMETRO
+        // CRONÔMETRO
         // =========================
 
         function iniciarCronometro() {
 
-            if (cronometroIniciado) return;
+
+            if (cronometroIniciado)
+                return;
+
 
             cronometroIniciado = true;
 
 
-            cronometro = setInterval(() => {
+            cronometro =
+                setInterval(() => {
 
-                tempo++;
 
-                document
-                    .getElementById("tempo")
-                    .textContent = tempo;
+                    tempo++;
 
-            }, 1000);
+
+                    document
+                        .getElementById(
+                            "tempo"
+                        )
+                        .textContent =
+                        tempo;
+
+
+                }, 1000);
 
         }
 
@@ -408,47 +1084,80 @@
         // MOVIMENTO
         // =========================
 
-        function mover(dLinha, dColuna) {
+        function mover(
+            dLinha,
+            dColuna
+        ) {
 
-            if (!jogoAtivo) return;
+
+            if (!jogoAtivo)
+                return;
 
 
             const novaLinha =
-                jogador.linha + dLinha;
+                jogador.linha +
+                dLinha;
+
 
             const novaColuna =
-                jogador.coluna + dColuna;
+                jogador.coluna +
+                dColuna;
 
+
+            // Fora do mapa
 
             if (
 
                 novaLinha < 0 ||
+
                 novaLinha >= tamanho ||
+
                 novaColuna < 0 ||
+
                 novaColuna >= tamanho
 
             ) {
+
                 return;
+
             }
 
 
-            if (mapa[novaLinha][novaColuna] === 1) {
+            // Parede
+
+            if (
+
+                mapa[
+                    novaLinha
+                ][
+                    novaColuna
+                ] === 1
+
+            ) {
+
                 return;
+
             }
 
 
-            // O CRONÔMETRO COMEÇA
-            // APENAS QUANDO O JOGADOR
-            // CONSEGUE ANDAR
+            // PRIMEIRO MOVIMENTO VÁLIDO
+            // COMEÇA O CRONÔMETRO
 
             iniciarCronometro();
 
 
-            jogador.linha = novaLinha;
-            jogador.coluna = novaColuna;
+            // Move
+
+            jogador.linha =
+                novaLinha;
+
+
+            jogador.coluna =
+                novaColuna;
 
 
             desenharLabirinto();
+
 
             verificarVitoria();
 
@@ -461,34 +1170,88 @@
 
         function verificarVitoria() {
 
+
             if (
 
-                jogador.linha === final.linha &&
-                jogador.coluna === final.coluna
+                jogador.linha ===
+                final.linha &&
+
+                jogador.coluna ===
+                final.coluna
 
             ) {
 
-                // PARA O CRONÔMETRO
 
-                clearInterval(cronometro);
+                // Para cronômetro
+
+                clearInterval(
+                    cronometro
+                );
+
 
                 cronometro = null;
 
-                cronometroIniciado = false;
+
+                cronometroIniciado =
+                    false;
 
 
                 jogoAtivo = false;
 
 
-                document
-                    .getElementById("mensagem")
-                    .textContent =
-                    "🎉 Fase " +
-                    fase +
-                    " concluída em " +
-                    tempo +
-                    " segundos!";
+                // Recorde
 
+                if (
+                    !recorde ||
+                    tempo < Number(recorde)
+                ) {
+
+
+                    recorde = tempo;
+
+
+                    localStorage.setItem(
+                        "recordeLabirinto",
+                        recorde
+                    );
+
+
+                    document
+                        .getElementById(
+                            "recorde"
+                        )
+                        .textContent =
+                        recorde + "s";
+
+
+                    document
+                        .getElementById(
+                            "mensagem"
+                        )
+                        .textContent =
+                        "🏆 NOVO RECORDE! " +
+                        tempo +
+                        " segundos!";
+
+                }
+
+                else {
+
+                    document
+                        .getElementById(
+                            "mensagem"
+                        )
+                        .textContent =
+                        "🎉 Fase " +
+                        fase +
+                        " concluída em " +
+                        tempo +
+                        " segundos!";
+
+                }
+
+
+                // Próxima fase
 
                 setTimeout(
                     proximaFase,
@@ -506,23 +1269,42 @@
 
         function proximaFase() {
 
+
             fase++;
+
+
+            // Aumenta o labirinto
 
             tamanho += 2;
 
 
-            if (tamanho > 25) {
+            // Máximo
+
+            if (
+                tamanho > 25
+            ) {
+
                 tamanho = 25;
+
             }
 
 
             document
-                .getElementById("fase")
-                .textContent = fase;
+                .getElementById(
+                    "fase"
+                )
+                .textContent =
+                fase;
 
 
-            // O TEMPO NÃO É ZERADO
-            // ELE CONTINUA DA FASE ANTERIOR
+            /*
+                NÃO ZERA O TEMPO!
+
+                Se terminou a fase 1
+                em 4 segundos:
+
+                Fase 2 começa em 4s.
+            */
 
 
             gerarLabirinto();
@@ -531,18 +1313,21 @@
             jogoAtivo = true;
 
 
-            // O CRONÔMETRO AINDA NÃO COMEÇOU
-            // NA NOVA FASE
+            // Cronômetro espera
+            // o primeiro movimento
 
-            cronometroIniciado = false;
+            cronometroIniciado =
+                false;
 
 
             document
-                .getElementById("mensagem")
+                .getElementById(
+                    "mensagem"
+                )
                 .textContent =
                 "🔥 Fase " +
                 fase +
-                "! Ande para começar o cronômetro.";
+                "! Ande para continuar.";
 
         }
 
@@ -553,37 +1338,54 @@
 
         function resetarJogo() {
 
-            clearInterval(cronometro);
+
+            clearInterval(
+                cronometro
+            );
+
 
             cronometro = null;
 
+
             jogoAtivo = false;
 
-            cronometroIniciado = false;
+
+            cronometroIniciado =
+                false;
 
 
             fase = 1;
 
+
             tamanho = 9;
+
 
             tempo = 0;
 
 
             document
-                .getElementById("tempo")
-                .textContent = "0";
+                .getElementById(
+                    "fase"
+                )
+                .textContent =
+                "1";
 
 
             document
-                .getElementById("fase")
-                .textContent = "1";
+                .getElementById(
+                    "tempo"
+                )
+                .textContent =
+                "0";
 
 
             gerarLabirinto();
 
 
             document
-                .getElementById("mensagem")
+                .getElementById(
+                    "mensagem"
+                )
                 .textContent =
                 "Clique em Começar para jogar!";
 
@@ -591,49 +1393,154 @@
 
 
         // =========================
-        // CONTROLES
+        // TECLADO PC
         // =========================
 
         document.addEventListener(
             "keydown",
             function(event) {
 
+
                 const tecla =
                     event.key.toLowerCase();
 
 
                 if (
+
                     tecla === "arrowup" ||
                     tecla === "w"
+
                 ) {
+
+                    event.preventDefault();
+
                     mover(-1, 0);
+
                 }
 
 
                 if (
+
                     tecla === "arrowdown" ||
                     tecla === "s"
+
                 ) {
+
+                    event.preventDefault();
+
                     mover(1, 0);
+
                 }
 
 
                 if (
+
                     tecla === "arrowleft" ||
                     tecla === "a"
+
                 ) {
+
+                    event.preventDefault();
+
                     mover(0, -1);
+
                 }
 
 
                 if (
+
                     tecla === "arrowright" ||
                     tecla === "d"
+
                 ) {
+
+                    event.preventDefault();
+
                     mover(0, 1);
+
                 }
 
             }
+        );
+
+
+        // =========================
+        // CONTROLES CELULAR
+        // =========================
+
+        function configurarBotao(
+            id,
+            dLinha,
+            dColuna
+        ) {
+
+
+            const botao =
+                document.getElementById(id);
+
+
+            // Touch
+
+            botao.addEventListener(
+                "touchstart",
+                function(event) {
+
+                    event.preventDefault();
+
+                    mover(
+                        dLinha,
+                        dColuna
+                    );
+
+                },
+                { passive: false }
+            );
+
+
+            // Clique normal
+
+            botao.addEventListener(
+                "click",
+                function(event) {
+
+                    event.preventDefault();
+
+                    mover(
+                        dLinha,
+                        dColuna
+                    );
+
+                }
+            );
+
+        }
+
+
+        configurarBotao(
+            "cima",
+            -1,
+            0
+        );
+
+
+        configurarBotao(
+            "baixo",
+            1,
+            0
+        );
+
+
+        configurarBotao(
+            "esquerda",
+            0,
+            -1
+        );
+
+
+        configurarBotao(
+            "direita",
+            0,
+            1
         );
 
 
@@ -642,7 +1549,9 @@
         // =========================
 
         document
-            .getElementById("comecar")
+            .getElementById(
+                "comecar"
+            )
             .addEventListener(
                 "click",
                 comecarJogo
@@ -650,11 +1559,27 @@
 
 
         document
-            .getElementById("resetar")
+            .getElementById(
+                "resetar"
+            )
             .addEventListener(
                 "click",
                 resetarJogo
             );
+
+
+        // =========================
+        // REDIMENSIONAR
+        // =========================
+
+        window.addEventListener(
+            "resize",
+            function() {
+
+                desenharLabirinto();
+
+            }
+        );
 
 
         // =========================
@@ -665,11 +1590,14 @@
 
 
         document
-            .getElementById("mensagem")
+            .getElementById(
+                "mensagem"
+            )
             .textContent =
             "Clique em Começar para jogar!";
 
     </script>
 
 </body>
+
 </html>
