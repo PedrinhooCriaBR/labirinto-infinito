@@ -21,22 +21,14 @@
         }
 
         body {
-
-            background: linear-gradient(
-                135deg,
-                #111827,
-                #1e3a5f
-            );
-
+            background: linear-gradient(135deg, #111827, #1e3a5f);
             color: white;
 
             min-height: 100vh;
             min-height: 100dvh;
 
             display: flex;
-
             flex-direction: column;
-
             align-items: center;
 
             padding: 15px;
@@ -44,49 +36,29 @@
             overflow-x: hidden;
         }
 
-
-        /* =========================
-           TÍTULO
-        ========================= */
-
         h1 {
-
             margin: 10px 0 15px;
-
             text-align: center;
-
-            font-size: clamp(
-                24px,
-                5vw,
-                38px
-            );
+            font-size: clamp(24px, 5vw, 38px);
         }
-
 
         /* =========================
            PAINEL
         ========================= */
 
         .painel {
-
             display: flex;
-
             gap: 8px;
-
             flex-wrap: wrap;
-
             justify-content: center;
 
             width: 100%;
-
             max-width: 900px;
 
             margin-bottom: 15px;
         }
 
-
         .info {
-
             background: #1f2937;
 
             padding: 10px 15px;
@@ -97,20 +69,14 @@
 
             font-weight: bold;
 
-            font-size: clamp(
-                14px,
-                3vw,
-                18px
-            );
+            font-size: clamp(14px, 3vw, 18px);
         }
 
-
         /* =========================
-           BOTÕES
+           BOTÕES PRINCIPAIS
         ========================= */
 
         button {
-
             border: none;
 
             border-radius: 10px;
@@ -128,35 +94,25 @@
             touch-action: manipulation;
         }
 
-
         button:active {
-
             transform: scale(0.92);
         }
 
-
         #comecar {
-
             background: #22c55e;
-
             padding: 10px 18px;
         }
-
 
         #resetar {
-
             background: #ef4444;
-
             padding: 10px 18px;
         }
 
-
         /* =========================
-           ÁREA DO LABIRINTO
+           LABIRINTO
         ========================= */
 
         #areaLabirinto {
-
             width: 100%;
 
             display: flex;
@@ -168,9 +124,7 @@
             overflow: hidden;
         }
 
-
         #labirinto {
-
             display: grid;
 
             background: white;
@@ -180,39 +134,29 @@
             max-width: 92vw;
 
             max-height: 60vh;
-
             max-height: 60dvh;
         }
 
-
         .celula {
-
             position: relative;
 
             width: 35px;
-
             height: 35px;
         }
 
-
         .parede {
-
             background: #111827;
         }
 
-
         .caminho {
-
             background: #e5e7eb;
         }
-
 
         /* =========================
            JOGADOR
         ========================= */
 
         .jogador {
-
             background: #2563eb !important;
 
             border-radius: 50%;
@@ -228,19 +172,15 @@
                 inset 0 0 3px rgba(255, 255, 255, 0.7);
         }
 
-
         .jogador::after {
-
             content: "";
 
             position: absolute;
 
             width: 35%;
-
             height: 35%;
 
             min-width: 3px;
-
             min-height: 3px;
 
             background: white;
@@ -248,23 +188,19 @@
             border-radius: 50%;
 
             top: 15%;
-
             left: 18%;
         }
-
 
         /* =========================
            FINAL
         ========================= */
 
         .final {
-
             background: #facc15;
 
             display: flex;
 
             align-items: center;
-
             justify-content: center;
 
             position: relative;
@@ -272,16 +208,13 @@
             z-index: 5;
         }
 
-
         /* =========================
-           MENSAGEM
+           MENSAGENS
         ========================= */
 
         #mensagem {
-
             display: none;
         }
-
 
         /* =========================
            CONTROLES MOBILE
@@ -293,20 +226,22 @@
 
             margin-top: 15px;
 
-            width: 190px;
+            /*
+            Aumentei um pouco o espaço
+            entre os botões.
+            */
 
-            height: 125px;
+            width: 210px;
+            height: 145px;
 
             position: relative;
         }
-
 
         .botaoMovimento {
 
             position: absolute;
 
             width: 60px;
-
             height: 60px;
 
             background: #2563eb;
@@ -320,12 +255,10 @@
             display: flex;
 
             align-items: center;
-
             justify-content: center;
 
             user-select: none;
         }
-
 
         .botaoMovimento:active {
 
@@ -334,48 +267,42 @@
             transform: scale(0.9);
         }
 
-
         /*
+            FORMATO:
 
-           FORMATO:
+                 ▲
 
-                W
-              A S D
-
+             ◀       ▶
+                 ▼
         */
-
 
         #cima {
 
             top: 0;
 
-            left: 65px;
+            left: 75px;
         }
-
 
         #esquerda {
 
-            top: 65px;
+            top: 75px;
 
             left: 0;
         }
 
-
         #baixo {
 
-            top: 65px;
+            top: 75px;
 
-            left: 65px;
+            left: 75px;
         }
-
 
         #direita {
 
-            top: 65px;
+            top: 75px;
 
             right: 0;
         }
-
 
         /* =========================
            CELULAR
@@ -390,14 +317,12 @@
                 justify-content: flex-start;
             }
 
-
             h1 {
 
                 margin-top: 5px;
 
                 margin-bottom: 10px;
             }
-
 
             .painel {
 
@@ -406,14 +331,12 @@
                 margin-bottom: 10px;
             }
 
-
             .info {
 
                 padding: 8px 10px;
 
                 font-size: 14px;
             }
-
 
             #comecar,
             #resetar {
@@ -423,22 +346,18 @@
                 font-size: 14px;
             }
 
-
             #labirinto {
 
                 max-width: 94vw;
 
                 max-height: 50vh;
-
                 max-height: 50dvh;
             }
-
 
             #controlesMobile {
 
                 display: block;
             }
-
 
             .jogador {
 
@@ -448,9 +367,7 @@
                     0 0 3px black,
                     0 0 2px white;
             }
-
         }
-
 
         /* =========================
            CELULAR DEITADO
@@ -464,7 +381,6 @@
                 padding: 5px;
             }
 
-
             h1 {
 
                 font-size: 22px;
@@ -472,30 +388,25 @@
                 margin: 2px;
             }
 
-
             .painel {
 
                 margin-bottom: 5px;
             }
 
-
             #labirinto {
 
                 max-height: 48vh;
-
                 max-height: 48dvh;
             }
 
-
             #controlesMobile {
 
-                width: 130px;
+                width: 145px;
 
-                height: 88px;
+                height: 103px;
 
                 margin-top: 5px;
             }
-
 
             .botaoMovimento {
 
@@ -506,44 +417,39 @@
                 font-size: 20px;
             }
 
-
             /*
                 W
-              A S D
-            */
 
+              A   S   D
+            */
 
             #cima {
 
-                left: 44px;
+                left: 51px;
 
                 top: 0;
             }
-
 
             #esquerda {
 
                 left: 0;
 
-                top: 44px;
+                top: 51px;
             }
-
 
             #baixo {
 
-                left: 44px;
+                left: 51px;
 
-                top: 44px;
+                top: 51px;
             }
-
 
             #direita {
 
                 right: 0;
 
-                top: 44px;
+                top: 51px;
             }
-
         }
 
     </style>
@@ -619,14 +525,9 @@
     </div>
 
 
-    <!--
-        CONTROLES DO CELULAR
-
-        FORMATO:
-
-             W
-           A S D
-    -->
+    <!-- =========================
+         CONTROLES DO CELULAR
+    ========================== -->
 
 
     <div id="controlesMobile">
@@ -689,9 +590,7 @@
 
         let fase = 1;
 
-
         let tamanho = 9;
-
 
         let mapa = [];
 
@@ -759,7 +658,6 @@
                 linha++
             ) {
 
-
                 mapa[linha] = [];
 
 
@@ -768,7 +666,6 @@
                     coluna < tamanho;
                     coluna++
                 ) {
-
 
                     mapa[linha][coluna] = 1;
 
@@ -832,8 +729,11 @@
                         novaColuna <
                         tamanho - 1 &&
 
-                        mapa[novaLinha]
-                            [novaColuna] === 1
+                        mapa[
+                            novaLinha
+                        ][
+                            novaColuna
+                        ] === 1
 
                     ) {
 
@@ -1006,19 +906,17 @@
 
 
                     if (
+
                         mapa[linha][coluna]
                         === 1
-                    ) {
 
+                    ) {
 
                         celula.classList.add(
                             "parede"
                         );
 
-                    }
-
-                    else {
-
+                    } else {
 
                         celula.classList.add(
                             "caminho"
@@ -1038,7 +936,6 @@
                         jogador.coluna
 
                     ) {
-
 
                         celula.classList.add(
                             "jogador"
@@ -1075,8 +972,8 @@
                                 8,
 
                                 Math.floor(
-                                    tamanhoCelula
-                                    * 0.65
+                                    tamanhoCelula *
+                                    0.65
                                 )
 
                             );
@@ -1210,10 +1107,7 @@
             }
 
 
-            /*
-                Primeiro movimento válido
-                inicia o cronômetro.
-            */
+            /* Primeiro movimento válido */
 
             iniciarCronometro();
 
@@ -1299,8 +1193,8 @@
 
 
                 /*
-                    Não aparece nenhuma
-                    frase na tela.
+                    Não mostra nenhuma
+                    frase.
                 */
 
 
@@ -1343,7 +1237,8 @@
 
 
             /*
-                O tempo continua.
+                O tempo continua
+                acumulado.
             */
 
 
@@ -1356,8 +1251,7 @@
 
             /*
                 Cronômetro espera
-                o primeiro movimento
-                válido da nova fase.
+                o próximo movimento.
             */
 
             cronometroIniciado =
@@ -1522,7 +1416,7 @@
 
 
         /* =========================
-           CONTROLES DO CELULAR
+           BOTÕES MOBILE
         ========================= */
 
         function configurarBotao(
@@ -1659,6 +1553,7 @@
         document.getElementById(
             "mensagem"
         ).textContent = "";
+
 
     </script>
 
