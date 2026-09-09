@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
+
     <meta charset="UTF-8">
 
     <meta name="viewport"
@@ -19,14 +21,22 @@
         }
 
         body {
-            background: linear-gradient(135deg, #111827, #1e3a5f);
+
+            background: linear-gradient(
+                135deg,
+                #111827,
+                #1e3a5f
+            );
+
             color: white;
 
             min-height: 100vh;
             min-height: 100dvh;
 
             display: flex;
+
             flex-direction: column;
+
             align-items: center;
 
             padding: 15px;
@@ -34,19 +44,31 @@
             overflow-x: hidden;
         }
 
+
+        /* =========================
+           TÍTULO
+        ========================= */
+
         h1 {
+
             margin: 10px 0 15px;
 
             text-align: center;
 
-            font-size: clamp(24px, 5vw, 38px);
+            font-size: clamp(
+                24px,
+                5vw,
+                38px
+            );
         }
+
 
         /* =========================
            PAINEL
         ========================= */
 
         .painel {
+
             display: flex;
 
             gap: 8px;
@@ -56,12 +78,15 @@
             justify-content: center;
 
             width: 100%;
+
             max-width: 900px;
 
             margin-bottom: 15px;
         }
 
+
         .info {
+
             background: #1f2937;
 
             padding: 10px 15px;
@@ -72,10 +97,20 @@
 
             font-weight: bold;
 
-            font-size: clamp(14px, 3vw, 18px);
+            font-size: clamp(
+                14px,
+                3vw,
+                18px
+            );
         }
 
+
+        /* =========================
+           BOTÕES
+        ========================= */
+
         button {
+
             border: none;
 
             border-radius: 10px;
@@ -93,27 +128,35 @@
             touch-action: manipulation;
         }
 
+
         button:active {
+
             transform: scale(0.92);
         }
 
+
         #comecar {
+
             background: #22c55e;
 
             padding: 10px 18px;
         }
 
+
         #resetar {
+
             background: #ef4444;
 
             padding: 10px 18px;
         }
 
+
         /* =========================
-           LABIRINTO
+           ÁREA DO LABIRINTO
         ========================= */
 
         #areaLabirinto {
+
             width: 100%;
 
             display: flex;
@@ -125,7 +168,9 @@
             overflow: hidden;
         }
 
+
         #labirinto {
+
             display: grid;
 
             background: white;
@@ -135,38 +180,42 @@
             max-width: 92vw;
 
             max-height: 60vh;
+
             max-height: 60dvh;
         }
 
+
         .celula {
-            width: 35px;
-            height: 35px;
 
             position: relative;
+
+            width: 35px;
+
+            height: 35px;
         }
 
+
         .parede {
+
             background: #111827;
         }
 
+
         .caminho {
+
             background: #e5e7eb;
         }
+
 
         /* =========================
            JOGADOR
         ========================= */
 
         .jogador {
+
             background: #2563eb !important;
 
             border-radius: 50%;
-
-            /*
-            Antes era 6px.
-            Agora é 2px para o boneco
-            continuar visível nas fases grandes.
-            */
 
             border: 2px solid white;
 
@@ -179,18 +228,19 @@
                 inset 0 0 3px rgba(255, 255, 255, 0.7);
         }
 
-        /* Faz o boneco continuar aparecendo
-           mesmo quando a célula fica pequena */
 
         .jogador::after {
+
             content: "";
 
             position: absolute;
 
             width: 35%;
+
             height: 35%;
 
             min-width: 3px;
+
             min-height: 3px;
 
             background: white;
@@ -198,14 +248,17 @@
             border-radius: 50%;
 
             top: 15%;
+
             left: 18%;
         }
+
 
         /* =========================
            FINAL
         ========================= */
 
         .final {
+
             background: #facc15;
 
             display: flex;
@@ -219,46 +272,41 @@
             z-index: 5;
         }
 
+
         /* =========================
            MENSAGEM
         ========================= */
 
         #mensagem {
-            margin-top: 12px;
 
-            font-size: clamp(16px, 4vw, 22px);
-
-            text-align: center;
-
-            min-height: 0;
-
-            font-weight: bold;
-
-            /*
-            Não ocupa espaço quando estiver vazia.
-            */
             display: none;
         }
+
 
         /* =========================
            CONTROLES MOBILE
         ========================= */
 
         #controlesMobile {
+
             display: none;
 
             margin-top: 15px;
 
             width: 190px;
-            height: 190px;
+
+            height: 125px;
 
             position: relative;
         }
 
+
         .botaoMovimento {
+
             position: absolute;
 
             width: 60px;
+
             height: 60px;
 
             background: #2563eb;
@@ -272,36 +320,62 @@
             display: flex;
 
             align-items: center;
+
             justify-content: center;
 
             user-select: none;
         }
 
+
         .botaoMovimento:active {
+
             background: #1d4ed8;
 
             transform: scale(0.9);
         }
 
+
+        /*
+
+           FORMATO:
+
+                W
+              A S D
+
+        */
+
+
         #cima {
+
             top: 0;
+
             left: 65px;
         }
 
-        #baixo {
-            bottom: 0;
-            left: 65px;
-        }
 
         #esquerda {
-            left: 0;
+
             top: 65px;
+
+            left: 0;
         }
 
-        #direita {
-            right: 0;
+
+        #baixo {
+
             top: 65px;
+
+            left: 65px;
         }
+
+
+        #direita {
+
+            top: 65px;
+
+            right: 0;
+        }
+
 
         /* =========================
            CELULAR
@@ -310,148 +384,230 @@
         @media (max-width: 700px) {
 
             body {
+
                 padding: 10px;
 
                 justify-content: flex-start;
             }
 
+
             h1 {
+
                 margin-top: 5px;
 
                 margin-bottom: 10px;
             }
 
+
             .painel {
+
                 gap: 6px;
 
                 margin-bottom: 10px;
             }
 
+
             .info {
+
                 padding: 8px 10px;
 
                 font-size: 14px;
             }
 
+
             #comecar,
             #resetar {
+
                 padding: 8px 12px;
 
                 font-size: 14px;
             }
 
+
             #labirinto {
+
                 max-width: 94vw;
 
                 max-height: 50vh;
+
                 max-height: 50dvh;
             }
 
+
             #controlesMobile {
+
                 display: block;
             }
 
-            /*
-            No celular o boneco fica ainda
-            mais destacado.
-            */
 
             .jogador {
+
                 border: 1px solid white;
 
                 box-shadow:
                     0 0 3px black,
                     0 0 2px white;
             }
+
         }
+
 
         /* =========================
            CELULAR DEITADO
         ========================= */
 
-        @media (max-width: 900px) and (orientation: landscape) {
+        @media (max-width: 900px)
+        and (orientation: landscape) {
 
             body {
+
                 padding: 5px;
             }
 
+
             h1 {
+
                 font-size: 22px;
 
                 margin: 2px;
             }
 
+
             .painel {
+
                 margin-bottom: 5px;
             }
 
+
             #labirinto {
+
                 max-height: 48vh;
+
                 max-height: 48dvh;
             }
 
+
             #controlesMobile {
+
                 width: 130px;
-                height: 130px;
+
+                height: 88px;
 
                 margin-top: 5px;
             }
 
+
             .botaoMovimento {
+
                 width: 42px;
+
                 height: 42px;
 
                 font-size: 20px;
             }
 
+
+            /*
+                W
+              A S D
+            */
+
+
             #cima {
+
                 left: 44px;
+
+                top: 0;
             }
 
-            #baixo {
-                left: 44px;
-            }
 
             #esquerda {
+
+                left: 0;
+
                 top: 44px;
             }
 
-            #direita {
+
+            #baixo {
+
+                left: 44px;
+
                 top: 44px;
             }
+
+
+            #direita {
+
+                right: 0;
+
+                top: 44px;
+            }
+
         }
 
     </style>
+
 </head>
+
 
 <body>
 
-    <h1>🌀 Labirinto Infinito</h1>
+
+    <h1>
+        🌀 Labirinto Infinito
+    </h1>
+
 
     <div class="painel">
 
+
         <div class="info">
+
             🏆 Fase:
-            <span id="fase">1</span>
+
+            <span id="fase">
+                1
+            </span>
+
         </div>
 
+
         <div class="info">
+
             ⏱ Tempo:
-            <span id="tempo">0</span>s
+
+            <span id="tempo">
+                0
+            </span>s
+
         </div>
 
+
         <div class="info">
+
             🥇 Recorde:
-            <span id="recorde">--</span>
+
+            <span id="recorde">
+                --
+            </span>
+
         </div>
+
 
         <button id="comecar">
+
             ▶ Começar
+
         </button>
 
+
         <button id="resetar">
+
             ↻ Resetar
+
         </button>
+
 
     </div>
 
@@ -463,33 +619,54 @@
     </div>
 
 
-    <!-- CONTROLES DO CELULAR -->
+    <!--
+        CONTROLES DO CELULAR
+
+        FORMATO:
+
+             W
+           A S D
+    -->
+
 
     <div id="controlesMobile">
+
 
         <button
             class="botaoMovimento"
             id="cima">
+
             ▲
+
         </button>
+
 
         <button
             class="botaoMovimento"
             id="esquerda">
+
             ◀
+
         </button>
 
-        <button
-            class="botaoMovimento"
-            id="direita">
-            ▶
-        </button>
 
         <button
             class="botaoMovimento"
             id="baixo">
+
             ▼
+
         </button>
+
+
+        <button
+            class="botaoMovimento"
+            id="direita">
+
+            ▶
+
+        </button>
+
 
     </div>
 
@@ -499,26 +676,41 @@
 
     <script>
 
+
+        /* =========================
+           VARIÁVEIS
+        ========================= */
+
         const labirinto =
-            document.getElementById("labirinto");
+            document.getElementById(
+                "labirinto"
+            );
 
 
         let fase = 1;
 
+
         let tamanho = 9;
+
 
         let mapa = [];
 
 
         let jogador = {
+
             linha: 1,
+
             coluna: 1
+
         };
 
 
         let final = {
+
             linha: 0,
+
             coluna: 0
+
         };
 
 
@@ -527,14 +719,13 @@
 
         let tempo = 0;
 
+
         let cronometro = null;
 
-        let cronometroIniciado = false;
 
+        let cronometroIniciado =
+            false;
 
-        /* =========================
-           RECORDE
-        ========================= */
 
         let recorde =
             localStorage.getItem(
@@ -558,6 +749,7 @@
 
         function gerarLabirinto() {
 
+
             mapa = [];
 
 
@@ -567,6 +759,7 @@
                 linha++
             ) {
 
+
                 mapa[linha] = [];
 
 
@@ -575,6 +768,7 @@
                     coluna < tamanho;
                     coluna++
                 ) {
+
 
                     mapa[linha][coluna] = 1;
 
@@ -587,6 +781,7 @@
                 linha,
                 coluna
             ) {
+
 
                 mapa[linha][coluna] = 0;
 
@@ -614,11 +809,15 @@
                     let direcao of direcoes
                 ) {
 
+
                     const novaLinha =
-                        linha + direcao[0];
+                        linha +
+                        direcao[0];
+
 
                     const novaColuna =
-                        coluna + direcao[1];
+                        coluna +
+                        direcao[1];
 
 
                     if (
@@ -633,9 +832,11 @@
                         novaColuna <
                         tamanho - 1 &&
 
-                        mapa[novaLinha][novaColuna] === 1
+                        mapa[novaLinha]
+                            [novaColuna] === 1
 
                     ) {
+
 
                         mapa[
                             novaLinha
@@ -676,6 +877,7 @@
             final.linha =
                 tamanho - 2;
 
+
             final.coluna =
                 tamanho - 2;
 
@@ -693,13 +895,15 @@
 
 
         /* =========================
-           TAMANHO DAS CÉLULAS
+           TAMANHO DA CÉLULA
         ========================= */
 
         function calcularTamanhoCelula() {
 
+
             const largura =
                 window.innerWidth;
+
 
             const altura =
                 window.innerHeight;
@@ -753,6 +957,7 @@
 
         function desenharLabirinto() {
 
+
             labirinto.innerHTML = "";
 
 
@@ -761,7 +966,10 @@
 
 
             labirinto.style.gridTemplateColumns =
-                `repeat(${tamanho}, ${tamanhoCelula}px)`;
+                `repeat(
+                    ${tamanho},
+                    ${tamanhoCelula}px
+                )`;
 
 
             for (
@@ -770,11 +978,13 @@
                 linha++
             ) {
 
+
                 for (
                     let coluna = 0;
                     coluna < tamanho;
                     coluna++
                 ) {
+
 
                     const celula =
                         document.createElement(
@@ -795,17 +1005,20 @@
                         tamanhoCelula + "px";
 
 
-                    /* Parede ou caminho */
-
                     if (
-                        mapa[linha][coluna] === 1
+                        mapa[linha][coluna]
+                        === 1
                     ) {
+
 
                         celula.classList.add(
                             "parede"
                         );
 
-                    } else {
+                    }
+
+                    else {
+
 
                         celula.classList.add(
                             "caminho"
@@ -826,6 +1039,7 @@
 
                     ) {
 
+
                         celula.classList.add(
                             "jogador"
                         );
@@ -845,6 +1059,7 @@
 
                     ) {
 
+
                         celula.classList.add(
                             "final"
                         );
@@ -854,19 +1069,16 @@
                             "🏁";
 
 
-                        /*
-                        Diminui o tamanho da
-                        bandeira quando o
-                        labirinto fica grande.
-                        */
-
                         let tamanhoBandeira =
                             Math.max(
+
                                 8,
+
                                 Math.floor(
-                                    tamanhoCelula *
-                                    0.65
+                                    tamanhoCelula
+                                    * 0.65
                                 )
+
                             );
 
 
@@ -894,19 +1106,12 @@
 
         function comecarJogo() {
 
+
             if (jogoAtivo)
                 return;
 
 
             jogoAtivo = true;
-
-            /*
-            O cronômetro NÃO começa
-            aqui.
-
-            Ele começa somente quando
-            houver um movimento válido.
-            */
 
         }
 
@@ -917,16 +1122,19 @@
 
         function iniciarCronometro() {
 
+
             if (cronometroIniciado)
                 return;
 
 
-            cronometroIniciado = true;
+            cronometroIniciado =
+                true;
 
 
             cronometro =
                 setInterval(
                     () => {
+
 
                         tempo++;
 
@@ -936,6 +1144,7 @@
                         ).textContent =
                             tempo;
 
+
                     },
                     1000
                 );
@@ -944,13 +1153,14 @@
 
 
         /* =========================
-           MOVER JOGADOR
+           MOVIMENTO
         ========================= */
 
         function mover(
             dLinha,
             dColuna
         ) {
+
 
             if (!jogoAtivo)
                 return;
@@ -965,8 +1175,6 @@
                 jogador.coluna +
                 dColuna;
 
-
-            /* Impede sair do mapa */
 
             if (
 
@@ -985,14 +1193,16 @@
             }
 
 
-            /* Impede atravessar parede */
+            /* Parede */
 
             if (
+
                 mapa[
                     novaLinha
                 ][
                     novaColuna
                 ] === 1
+
             ) {
 
                 return;
@@ -1001,8 +1211,8 @@
 
 
             /*
-            Primeiro movimento válido
-            inicia o cronômetro.
+                Primeiro movimento válido
+                inicia o cronômetro.
             */
 
             iniciarCronometro();
@@ -1025,10 +1235,11 @@
 
 
         /* =========================
-           VERIFICAR VITÓRIA
+           VITÓRIA
         ========================= */
 
         function verificarVitoria() {
+
 
             if (
 
@@ -1040,6 +1251,7 @@
 
             ) {
 
+
                 clearInterval(
                     cronometro
                 );
@@ -1047,16 +1259,16 @@
 
                 cronometro = null;
 
+
                 cronometroIniciado =
                     false;
+
 
                 jogoAtivo =
                     false;
 
 
-                /*
-                Verifica recorde
-                */
+                /* RECORDE */
 
                 if (
 
@@ -1066,6 +1278,7 @@
                     Number(recorde)
 
                 ) {
+
 
                     recorde =
                         tempo;
@@ -1086,8 +1299,8 @@
 
 
                 /*
-                Não mostra nenhuma
-                frase na tela.
+                    Não aparece nenhuma
+                    frase na tela.
                 */
 
 
@@ -1107,21 +1320,12 @@
 
         function proximaFase() {
 
+
             fase++;
 
 
-            /*
-            Aumenta a dificuldade.
-
-            9 → 11 → 13 → 15...
-            */
-
             tamanho += 2;
 
-
-            /*
-            Limite máximo
-            */
 
             if (
                 tamanho > 25
@@ -1139,10 +1343,9 @@
 
 
             /*
-            IMPORTANTE:
-
-            O tempo NÃO volta para zero.
+                O tempo continua.
             */
+
 
             gerarLabirinto();
 
@@ -1152,17 +1355,14 @@
 
 
             /*
-            Cronômetro fica parado
-            até o próximo movimento.
+                Cronômetro espera
+                o primeiro movimento
+                válido da nova fase.
             */
 
             cronometroIniciado =
                 false;
 
-
-            /*
-            Nenhuma mensagem.
-            */
 
             document.getElementById(
                 "mensagem"
@@ -1177,17 +1377,16 @@
 
         function resetarJogo() {
 
+
             clearInterval(
                 cronometro
             );
 
 
-            cronometro =
-                null;
+            cronometro = null;
 
 
-            jogoAtivo =
-                false;
+            jogoAtivo = false;
 
 
             cronometroIniciado =
@@ -1234,6 +1433,7 @@
             "keydown",
             function(event) {
 
+
                 const tecla =
                     event.key.toLowerCase();
 
@@ -1246,9 +1446,14 @@
 
                 ) {
 
+
                     event.preventDefault();
 
-                    mover(-1, 0);
+
+                    mover(
+                        -1,
+                        0
+                    );
 
                 }
 
@@ -1261,9 +1466,14 @@
 
                 ) {
 
+
                     event.preventDefault();
 
-                    mover(1, 0);
+
+                    mover(
+                        1,
+                        0
+                    );
 
                 }
 
@@ -1276,9 +1486,14 @@
 
                 ) {
 
+
                     event.preventDefault();
 
-                    mover(0, -1);
+
+                    mover(
+                        0,
+                        -1
+                    );
 
                 }
 
@@ -1291,9 +1506,14 @@
 
                 ) {
 
+
                     event.preventDefault();
 
-                    mover(0, 1);
+
+                    mover(
+                        0,
+                        1
+                    );
 
                 }
 
@@ -1302,7 +1522,7 @@
 
 
         /* =========================
-           BOTÕES MOBILE
+           CONTROLES DO CELULAR
         ========================= */
 
         function configurarBotao(
@@ -1310,6 +1530,7 @@
             dLinha,
             dColuna
         ) {
+
 
             const botao =
                 document.getElementById(
@@ -1321,6 +1542,7 @@
                 "touchstart",
                 function(event) {
 
+
                     event.preventDefault();
 
 
@@ -1328,6 +1550,7 @@
                         dLinha,
                         dColuna
                     );
+
 
                 },
                 {
@@ -1340,6 +1563,7 @@
                 "click",
                 function(event) {
 
+
                     event.preventDefault();
 
 
@@ -1347,6 +1571,7 @@
                         dLinha,
                         dColuna
                     );
+
 
                 }
             );
@@ -1383,19 +1608,27 @@
 
 
         /* =========================
-           BOTÕES
+           BOTÃO COMEÇAR
         ========================= */
 
         document
-            .getElementById("comecar")
+            .getElementById(
+                "comecar"
+            )
             .addEventListener(
                 "click",
                 comecarJogo
             );
 
 
+        /* =========================
+           BOTÃO RESETAR
+        ========================= */
+
         document
-            .getElementById("resetar")
+            .getElementById(
+                "resetar"
+            )
             .addEventListener(
                 "click",
                 resetarJogo
@@ -1403,7 +1636,7 @@
 
 
         /* =========================
-           REDIMENSIONAMENTO
+           REDIMENSIONAR
         ========================= */
 
         window.addEventListener(
@@ -1417,7 +1650,7 @@
 
 
         /* =========================
-           INICIAR JOGO
+           INICIAR
         ========================= */
 
         gerarLabirinto();
@@ -1430,4 +1663,5 @@
     </script>
 
 </body>
+
 </html>
