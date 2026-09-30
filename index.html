@@ -21,14 +21,22 @@
         }
 
         body {
-            background: linear-gradient(135deg, #111827, #1e3a5f);
+
+            background: linear-gradient(
+                135deg,
+                #111827,
+                #1e3a5f
+            );
+
             color: white;
 
             min-height: 100vh;
             min-height: 100dvh;
 
             display: flex;
+
             flex-direction: column;
+
             align-items: center;
 
             padding: 15px;
@@ -36,29 +44,46 @@
             overflow-x: hidden;
         }
 
+
+        /* =========================
+           TÍTULO
+        ========================= */
+
         h1 {
+
             margin: 10px 0 15px;
+
             text-align: center;
-            font-size: clamp(24px, 5vw, 38px);
+
+            font-size:
+                clamp(24px, 5vw, 38px);
         }
+
 
         /* =========================
            PAINEL
         ========================= */
 
         .painel {
+
             display: flex;
+
             gap: 8px;
+
             flex-wrap: wrap;
+
             justify-content: center;
 
             width: 100%;
+
             max-width: 900px;
 
             margin-bottom: 15px;
         }
 
+
         .info {
+
             background: #1f2937;
 
             padding: 10px 15px;
@@ -69,14 +94,17 @@
 
             font-weight: bold;
 
-            font-size: clamp(14px, 3vw, 18px);
+            font-size:
+                clamp(14px, 3vw, 18px);
         }
 
+
         /* =========================
-           BOTÕES PRINCIPAIS
+           BOTÕES
         ========================= */
 
         button {
+
             border: none;
 
             border-radius: 10px;
@@ -94,25 +122,35 @@
             touch-action: manipulation;
         }
 
+
         button:active {
+
             transform: scale(0.92);
         }
 
+
         #comecar {
+
             background: #22c55e;
+
             padding: 10px 18px;
         }
+
 
         #resetar {
+
             background: #ef4444;
+
             padding: 10px 18px;
         }
 
+
         /* =========================
-           LABIRINTO
+           ÁREA DO LABIRINTO
         ========================= */
 
         #areaLabirinto {
+
             width: 100%;
 
             display: flex;
@@ -124,39 +162,51 @@
             overflow: hidden;
         }
 
+
         #labirinto {
+
             display: grid;
 
             background: white;
 
             border: 4px solid white;
 
-            max-width: 92vw;
+            max-width: 94vw;
 
             max-height: 60vh;
+
             max-height: 60dvh;
         }
 
+
         .celula {
+
             position: relative;
 
             width: 35px;
+
             height: 35px;
         }
 
+
         .parede {
+
             background: #111827;
         }
 
+
         .caminho {
+
             background: #e5e7eb;
         }
+
 
         /* =========================
            JOGADOR
         ========================= */
 
         .jogador {
+
             background: #2563eb !important;
 
             border-radius: 50%;
@@ -168,19 +218,24 @@
             z-index: 10;
 
             box-shadow:
-                0 0 4px rgba(0, 0, 0, 0.8),
-                inset 0 0 3px rgba(255, 255, 255, 0.7);
+                0 0 4px rgba(0,0,0,0.8),
+                inset 0 0 3px
+                rgba(255,255,255,0.7);
         }
 
+
         .jogador::after {
+
             content: "";
 
             position: absolute;
 
             width: 35%;
+
             height: 35%;
 
             min-width: 3px;
+
             min-height: 3px;
 
             background: white;
@@ -188,19 +243,23 @@
             border-radius: 50%;
 
             top: 15%;
+
             left: 18%;
         }
+
 
         /* =========================
            FINAL
         ========================= */
 
         .final {
+
             background: #facc15;
 
             display: flex;
 
             align-items: center;
+
             justify-content: center;
 
             position: relative;
@@ -208,13 +267,16 @@
             z-index: 5;
         }
 
+
         /* =========================
-           MENSAGENS
+           MENSAGEM
         ========================= */
 
         #mensagem {
+
             display: none;
         }
+
 
         /* =========================
            CONTROLES MOBILE
@@ -226,22 +288,20 @@
 
             margin-top: 15px;
 
-            /*
-            Aumentei um pouco o espaço
-            entre os botões.
-            */
-
             width: 210px;
+
             height: 145px;
 
             position: relative;
         }
+
 
         .botaoMovimento {
 
             position: absolute;
 
             width: 60px;
+
             height: 60px;
 
             background: #2563eb;
@@ -255,10 +315,12 @@
             display: flex;
 
             align-items: center;
+
             justify-content: center;
 
             user-select: none;
         }
+
 
         .botaoMovimento:active {
 
@@ -267,14 +329,6 @@
             transform: scale(0.9);
         }
 
-        /*
-            FORMATO:
-
-                 ▲
-
-             ◀       ▶
-                 ▼
-        */
 
         #cima {
 
@@ -283,12 +337,14 @@
             left: 75px;
         }
 
+
         #esquerda {
 
             top: 75px;
 
             left: 0;
         }
+
 
         #baixo {
 
@@ -297,12 +353,14 @@
             left: 75px;
         }
 
+
         #direita {
 
             top: 75px;
 
             right: 0;
         }
+
 
         /* =========================
            CELULAR
@@ -317,12 +375,14 @@
                 justify-content: flex-start;
             }
 
+
             h1 {
 
                 margin-top: 5px;
 
                 margin-bottom: 10px;
             }
+
 
             .painel {
 
@@ -331,12 +391,14 @@
                 margin-bottom: 10px;
             }
 
+
             .info {
 
                 padding: 8px 10px;
 
                 font-size: 14px;
             }
+
 
             #comecar,
             #resetar {
@@ -346,18 +408,22 @@
                 font-size: 14px;
             }
 
+
             #labirinto {
 
                 max-width: 94vw;
 
                 max-height: 50vh;
+
                 max-height: 50dvh;
             }
+
 
             #controlesMobile {
 
                 display: block;
             }
+
 
             .jogador {
 
@@ -367,7 +433,9 @@
                     0 0 3px black,
                     0 0 2px white;
             }
+
         }
+
 
         /* =========================
            CELULAR DEITADO
@@ -381,6 +449,7 @@
                 padding: 5px;
             }
 
+
             h1 {
 
                 font-size: 22px;
@@ -388,16 +457,20 @@
                 margin: 2px;
             }
 
+
             .painel {
 
                 margin-bottom: 5px;
             }
 
+
             #labirinto {
 
                 max-height: 48vh;
+
                 max-height: 48dvh;
             }
+
 
             #controlesMobile {
 
@@ -408,6 +481,7 @@
                 margin-top: 5px;
             }
 
+
             .botaoMovimento {
 
                 width: 42px;
@@ -417,11 +491,6 @@
                 font-size: 20px;
             }
 
-            /*
-                W
-
-              A   S   D
-            */
 
             #cima {
 
@@ -430,12 +499,14 @@
                 top: 0;
             }
 
+
             #esquerda {
 
                 left: 0;
 
                 top: 51px;
             }
+
 
             #baixo {
 
@@ -444,12 +515,14 @@
                 top: 51px;
             }
 
+
             #direita {
 
                 right: 0;
 
                 top: 51px;
             }
+
         }
 
     </style>
@@ -461,7 +534,9 @@
 
 
     <h1>
+
         🌀 Labirinto Infinito
+
     </h1>
 
 
@@ -473,7 +548,9 @@
             🏆 Fase:
 
             <span id="fase">
+
                 1
+
             </span>
 
         </div>
@@ -484,7 +561,9 @@
             ⏱ Tempo:
 
             <span id="tempo">
+
                 0
+
             </span>s
 
         </div>
@@ -495,7 +574,9 @@
             🥇 Recorde:
 
             <span id="recorde">
+
                 --
+
             </span>
 
         </div>
@@ -526,9 +607,8 @@
 
 
     <!-- =========================
-         CONTROLES DO CELULAR
+         CONTROLES MOBILE
     ========================== -->
-
 
     <div id="controlesMobile">
 
@@ -578,9 +658,9 @@
     <script>
 
 
-        /* =========================
+        /* =====================================================
            VARIÁVEIS
-        ========================= */
+        ===================================================== */
 
         const labirinto =
             document.getElementById(
@@ -642,15 +722,68 @@
         }
 
 
-        /* =========================
+        /* =====================================================
            GERAR LABIRINTO
-        ========================= */
+        ===================================================== */
 
         function gerarLabirinto() {
 
 
+            /*
+                FASES 1 ATÉ 7
+
+                9
+                11
+                13
+                15
+                17
+                19
+                21
+            */
+
+            if (fase < 8) {
+
+                gerarLabirintoNormal();
+
+                return;
+            }
+
+
+            /*
+                FASE 8 EM DIANTE
+
+                25
+                27
+                29
+                31
+            */
+
+            tamanho =
+                Math.min(
+                    31,
+                    25 +
+                    (fase - 8) * 2
+                );
+
+
+            gerarLabirintoGrande();
+
+        }
+
+
+        /* =====================================================
+           LABIRINTO NORMAL
+        ===================================================== */
+
+        function gerarLabirintoNormal() {
+
+
             mapa = [];
 
+
+            /*
+                TUDO COMEÇA COMO PAREDE
+            */
 
             for (
                 let linha = 0;
@@ -673,6 +806,10 @@
 
             }
 
+
+            /*
+                CRIA OS CORREDORES
+            */
 
             function criarCaminho(
                 linha,
@@ -739,13 +876,6 @@
 
 
                         mapa[
-                            novaLinha
-                        ][
-                            novaColuna
-                        ] = 0;
-
-
-                        mapa[
                             linha +
                             direcao[0] / 2
                         ][
@@ -769,14 +899,32 @@
             criarCaminho(1, 1);
 
 
+            /*
+                POUCOS CAMINHOS EXTRAS
+            */
+
+            adicionarCaminhosExtras(
+                0.12
+            );
+
+
+            /*
+                INÍCIO
+            */
+
             jogador.linha = 1;
 
             jogador.coluna = 1;
 
+            mapa[1][1] = 0;
+
+
+            /*
+                FINAL
+            */
 
             final.linha =
                 tamanho - 2;
-
 
             final.coluna =
                 tamanho - 2;
@@ -794,9 +942,551 @@
         }
 
 
-        /* =========================
+        /* =====================================================
+           LABIRINTO GRANDE
+           
+           A PARTIR DA FASE 8
+        ===================================================== */
+
+        function gerarLabirintoGrande() {
+
+
+            mapa = [];
+
+
+            /*
+                =============================================
+                TUDO COMEÇA COMO PAREDE
+                =============================================
+            */
+
+            for (
+                let linha = 0;
+                linha < tamanho;
+                linha++
+            ) {
+
+                mapa[linha] = [];
+
+
+                for (
+                    let coluna = 0;
+                    coluna < tamanho;
+                    coluna++
+                ) {
+
+                    mapa[linha][coluna] = 1;
+
+                }
+
+            }
+
+
+            /*
+                =============================================
+                ENTRADA
+                =============================================
+            */
+
+            const colunaEntrada =
+                Math.floor(
+                    tamanho / 2
+                );
+
+
+            /*
+                Garante posição ímpar.
+            */
+
+            const entrada =
+                colunaEntrada % 2 === 0
+                    ? colunaEntrada - 1
+                    : colunaEntrada;
+
+
+            /*
+                =============================================
+                GERADOR DO LABIRINTO
+                =============================================
+            */
+
+            function criarCaminhoGrande(
+                linha,
+                coluna
+            ) {
+
+
+                mapa[linha][coluna] = 0;
+
+
+                const direcoes = [
+
+                    [-2, 0],
+
+                    [2, 0],
+
+                    [0, -2],
+
+                    [0, 2]
+
+                ];
+
+
+                /*
+                    Mistura as direções
+                    para cada labirinto
+                    ficar diferente.
+                */
+
+                direcoes.sort(
+                    () =>
+                        Math.random() - 0.5
+                );
+
+
+                for (
+                    let direcao of direcoes
+                ) {
+
+
+                    const novaLinha =
+                        linha +
+                        direcao[0];
+
+
+                    const novaColuna =
+                        coluna +
+                        direcao[1];
+
+
+                    if (
+
+                        novaLinha > 0 &&
+
+                        novaLinha <
+                        tamanho - 1 &&
+
+                        novaColuna > 0 &&
+
+                        novaColuna <
+                        tamanho - 1 &&
+
+                        mapa[
+                            novaLinha
+                        ][
+                            novaColuna
+                        ] === 1
+
+                    ) {
+
+
+                        /*
+                            Abre apenas
+                            uma célula
+                            entre os corredores.
+                        */
+
+                        mapa[
+                            linha +
+                            direcao[0] / 2
+                        ][
+                            coluna +
+                            direcao[1] / 2
+                        ] = 0;
+
+
+                        criarCaminhoGrande(
+                            novaLinha,
+                            novaColuna
+                        );
+
+                    }
+
+                }
+
+            }
+
+
+            /*
+                COMEÇA NO TOPO
+            */
+
+            criarCaminhoGrande(
+                1,
+                entrada
+            );
+
+
+            /*
+                =============================================
+                ENTRADA PELO TOPO
+                =============================================
+            */
+
+            jogador.linha = 0;
+
+            jogador.coluna = entrada;
+
+
+            mapa[0][entrada] = 0;
+
+            mapa[1][entrada] = 0;
+
+
+            /*
+                =============================================
+                SAÍDA PELO FUNDO
+                =============================================
+            */
+
+            final.linha =
+                tamanho - 1;
+
+            final.coluna =
+                entrada;
+
+
+            mapa[
+                tamanho - 2
+            ][
+                entrada
+            ] = 0;
+
+
+            mapa[
+                tamanho - 1
+            ][
+                entrada
+            ] = 0;
+
+
+            /*
+                =============================================
+                POUQUÍSSIMAS CONEXÕES EXTRAS
+                =============================================
+
+                O valor baixo é proposital.
+
+                Queremos MUITAS paredes.
+            */
+
+            adicionarCaminhosExtras(
+                0.06
+            );
+
+
+            /*
+                =============================================
+                GARANTE ENTRADA
+                =============================================
+            */
+
+            mapa[0][entrada] = 0;
+
+            mapa[1][entrada] = 0;
+
+
+            /*
+                =============================================
+                GARANTE SAÍDA
+                ============================================= */
+
+            mapa[
+                tamanho - 2
+            ][
+                entrada
+            ] = 0;
+
+
+            mapa[
+                tamanho - 1
+            ][
+                entrada
+            ] = 0;
+
+
+            desenharLabirinto();
+
+        }
+
+
+        /* =====================================================
+           CAMINHOS EXTRAS
+           
+           MUITO REDUZIDOS
+        ===================================================== */
+
+        function adicionarCaminhosExtras(
+            chance
+        ) {
+
+
+            /*
+                =============================================
+                PRIMEIRA PASSADA
+                =============================================
+
+                Só abre uma pequena quantidade
+                de paredes que ligam dois corredores.
+            */
+
+            for (
+                let linha = 1;
+                linha < tamanho - 1;
+                linha++
+            ) {
+
+
+                for (
+                    let coluna = 1;
+                    coluna < tamanho - 1;
+                    coluna++
+                ) {
+
+
+                    /*
+                        Se já é caminho,
+                        não mexe.
+                    */
+
+                    if (
+                        mapa[
+                            linha
+                        ][
+                            coluna
+                        ] !== 1
+                    ) {
+
+                        continue;
+
+                    }
+
+
+                    /*
+                        ESQUERDA + DIREITA
+                    */
+
+                    const horizontal =
+
+                        mapa[
+                            linha
+                        ][
+                            coluna - 1
+                        ] === 0 &&
+
+                        mapa[
+                            linha
+                        ][
+                            coluna + 1
+                        ] === 0;
+
+
+                    /*
+                        CIMA + BAIXO
+                    */
+
+                    const vertical =
+
+                        mapa[
+                            linha - 1
+                        ][
+                            coluna
+                        ] === 0 &&
+
+                        mapa[
+                            linha + 1
+                        ][
+                            coluna
+                        ] === 0;
+
+
+                    /*
+                        Abre muito pouco.
+                    */
+
+                    if (
+                        horizontal ||
+                        vertical
+                    ) {
+
+
+                        if (
+                            Math.random()
+                            <
+                            chance * 0.35
+                        ) {
+
+                            mapa[
+                                linha
+                            ][
+                                coluna
+                            ] = 0;
+
+                        }
+
+                    }
+
+                }
+
+            }
+
+
+            /*
+                =============================================
+                SEGUNDA PASSADA
+                =============================================
+
+                Cria algumas bifurcações,
+                mas sem deixar o mapa aberto.
+            */
+
+            const tentativas =
+                Math.floor(
+                    tamanho * 0.5
+                );
+
+
+            for (
+                let i = 0;
+                i < tentativas;
+                i++
+            ) {
+
+
+                const linha =
+                    1 +
+                    Math.floor(
+                        Math.random()
+                        *
+                        (tamanho - 2)
+                    );
+
+
+                const coluna =
+                    1 +
+                    Math.floor(
+                        Math.random()
+                        *
+                        (tamanho - 2)
+                    );
+
+
+                /*
+                    Só trabalha
+                    com parede.
+                */
+
+                if (
+                    mapa[
+                        linha
+                    ][
+                        coluna
+                    ] !== 1
+                ) {
+
+                    continue;
+
+                }
+
+
+                let vizinhos = 0;
+
+
+                /*
+                    CIMA
+                */
+
+                if (
+                    mapa[
+                        linha - 1
+                    ][
+                        coluna
+                    ] === 0
+                ) {
+
+                    vizinhos++;
+
+                }
+
+
+                /*
+                    BAIXO
+                */
+
+                if (
+                    mapa[
+                        linha + 1
+                    ][
+                        coluna
+                    ] === 0
+                ) {
+
+                    vizinhos++;
+
+                }
+
+
+                /*
+                    ESQUERDA
+                */
+
+                if (
+                    mapa[
+                        linha
+                    ][
+                        coluna - 1
+                    ] === 0
+                ) {
+
+                    vizinhos++;
+
+                }
+
+
+                /*
+                    DIREITA
+                */
+
+                if (
+                    mapa[
+                        linha
+                    ][
+                        coluna + 1
+                    ] === 0
+                ) {
+
+                    vizinhos++;
+
+                }
+
+
+                /*
+                    Só abre quando
+                    exatamente dois
+                    corredores se encontram.
+                */
+
+                if (
+                    vizinhos === 2 &&
+                    Math.random() < 0.25
+                ) {
+
+                    mapa[
+                        linha
+                    ][
+                        coluna
+                    ] = 0;
+
+                }
+
+            }
+
+        }
+
+
+        /* =====================================================
            TAMANHO DA CÉLULA
-        ========================= */
+        ===================================================== */
 
         function calcularTamanhoCelula() {
 
@@ -822,7 +1512,8 @@
             let tamanhoCelula =
                 Math.floor(
 
-                    tamanhoMaximo /
+                    tamanhoMaximo
+                    /
                     tamanho
 
                 );
@@ -837,11 +1528,17 @@
             }
 
 
+            /*
+                Evita o jogador
+                desaparecer em
+                fases muito grandes.
+            */
+
             if (
-                tamanhoCelula < 12
+                tamanhoCelula < 9
             ) {
 
-                tamanhoCelula = 12;
+                tamanhoCelula = 9;
 
             }
 
@@ -851,9 +1548,9 @@
         }
 
 
-        /* =========================
-           DESENHAR LABIRINTO
-        ========================= */
+        /* =====================================================
+           DESENHAR
+        ===================================================== */
 
         function desenharLabirinto() {
 
@@ -905,10 +1602,17 @@
                         tamanhoCelula + "px";
 
 
+                    /*
+                        PAREDE
+                    */
+
                     if (
 
-                        mapa[linha][coluna]
-                        === 1
+                        mapa[
+                            linha
+                        ][
+                            coluna
+                        ] === 1
 
                     ) {
 
@@ -916,7 +1620,14 @@
                             "parede"
                         );
 
-                    } else {
+                    }
+
+
+                    /*
+                        CAMINHO
+                    */
+
+                    else {
 
                         celula.classList.add(
                             "caminho"
@@ -925,7 +1636,9 @@
                     }
 
 
-                    /* JOGADOR */
+                    /*
+                        JOGADOR
+                    */
 
                     if (
 
@@ -944,7 +1657,9 @@
                     }
 
 
-                    /* FINAL */
+                    /*
+                        FINAL
+                    */
 
                     if (
 
@@ -966,22 +1681,22 @@
                             "🏁";
 
 
-                        let tamanhoBandeira =
+                        const tamanhoBandeira =
                             Math.max(
 
-                                8,
+                                7,
 
                                 Math.floor(
-                                    tamanhoCelula *
-                                    0.65
+                                    tamanhoCelula
+                                    * 0.65
                                 )
 
                             );
 
 
                         celula.style.fontSize =
-                            tamanhoBandeira +
-                            "px";
+                            tamanhoBandeira
+                            + "px";
 
                     }
 
@@ -997,9 +1712,9 @@
         }
 
 
-        /* =========================
+        /* =====================================================
            COMEÇAR
-        ========================= */
+        ===================================================== */
 
         function comecarJogo() {
 
@@ -1013,14 +1728,16 @@
         }
 
 
-        /* =========================
+        /* =====================================================
            CRONÔMETRO
-        ========================= */
+        ===================================================== */
 
         function iniciarCronometro() {
 
 
-            if (cronometroIniciado)
+            if (
+                cronometroIniciado
+            )
                 return;
 
 
@@ -1049,9 +1766,9 @@
         }
 
 
-        /* =========================
+        /* =====================================================
            MOVIMENTO
-        ========================= */
+        ===================================================== */
 
         function mover(
             dLinha,
@@ -1064,14 +1781,20 @@
 
 
             const novaLinha =
-                jogador.linha +
+                jogador.linha
+                +
                 dLinha;
 
 
             const novaColuna =
-                jogador.coluna +
+                jogador.coluna
+                +
                 dColuna;
 
+
+            /*
+                FORA DO MAPA
+            */
 
             if (
 
@@ -1090,7 +1813,9 @@
             }
 
 
-            /* Parede */
+            /*
+                PAREDE
+            */
 
             if (
 
@@ -1107,7 +1832,9 @@
             }
 
 
-            /* Primeiro movimento válido */
+            /*
+                PRIMEIRO MOVIMENTO
+            */
 
             iniciarCronometro();
 
@@ -1128,9 +1855,9 @@
         }
 
 
-        /* =========================
-           VITÓRIA
-        ========================= */
+        /* =====================================================
+           VERIFICAR VITÓRIA
+        ===================================================== */
 
         function verificarVitoria() {
 
@@ -1162,7 +1889,9 @@
                     false;
 
 
-                /* RECORDE */
+                /*
+                    RECORDE
+                */
 
                 if (
 
@@ -1193,10 +1922,8 @@
 
 
                 /*
-                    Não mostra nenhuma
-                    frase.
+                    PRÓXIMA FASE
                 */
-
 
                 setTimeout(
                     proximaFase,
@@ -1208,9 +1935,9 @@
         }
 
 
-        /* =========================
+        /* =====================================================
            PRÓXIMA FASE
-        ========================= */
+        ===================================================== */
 
         function proximaFase() {
 
@@ -1218,14 +1945,15 @@
             fase++;
 
 
-            tamanho += 2;
-
+            /*
+                FASES 1-7
+            */
 
             if (
-                tamanho > 25
+                fase < 8
             ) {
 
-                tamanho = 25;
+                tamanho += 2;
 
             }
 
@@ -1237,37 +1965,33 @@
 
 
             /*
-                O tempo continua
-                acumulado.
+                Gera novo labirinto.
             */
-
 
             gerarLabirinto();
 
 
-            jogoAtivo =
-                true;
+            /*
+                Libera o jogo.
+            */
+
+            jogoAtivo = true;
 
 
             /*
                 Cronômetro espera
-                o próximo movimento.
+                o primeiro movimento.
             */
 
             cronometroIniciado =
                 false;
 
-
-            document.getElementById(
-                "mensagem"
-            ).textContent = "";
-
         }
 
 
-        /* =========================
+        /* =====================================================
            RESETAR
-        ========================= */
+        ===================================================== */
 
         function resetarJogo() {
 
@@ -1308,20 +2032,18 @@
                 "0";
 
 
-            document.getElementById(
-                "mensagem"
-            ).textContent =
-                "";
-
+            /*
+                NÃO APAGA O RECORDE.
+            */
 
             gerarLabirinto();
 
         }
 
 
-        /* =========================
+        /* =====================================================
            TECLADO PC
-        ========================= */
+        ===================================================== */
 
         document.addEventListener(
             "keydown",
@@ -1331,6 +2053,10 @@
                 const tecla =
                     event.key.toLowerCase();
 
+
+                /*
+                    CIMA
+                */
 
                 if (
 
@@ -1352,6 +2078,10 @@
                 }
 
 
+                /*
+                    BAIXO
+                */
+
                 if (
 
                     tecla === "arrowdown" ||
@@ -1372,6 +2102,10 @@
                 }
 
 
+                /*
+                    ESQUERDA
+                */
+
                 if (
 
                     tecla === "arrowleft" ||
@@ -1391,6 +2125,10 @@
 
                 }
 
+
+                /*
+                    DIREITA
+                */
 
                 if (
 
@@ -1415,9 +2153,9 @@
         );
 
 
-        /* =========================
+        /* =====================================================
            BOTÕES MOBILE
-        ========================= */
+        ===================================================== */
 
         function configurarBotao(
             id,
@@ -1431,6 +2169,10 @@
                     id
                 );
 
+
+            /*
+                TOUCH
+            */
 
             botao.addEventListener(
                 "touchstart",
@@ -1452,6 +2194,10 @@
                 }
             );
 
+
+            /*
+                CLICK
+            */
 
             botao.addEventListener(
                 "click",
@@ -1501,9 +2247,9 @@
         );
 
 
-        /* =========================
+        /* =====================================================
            BOTÃO COMEÇAR
-        ========================= */
+        ===================================================== */
 
         document
             .getElementById(
@@ -1515,9 +2261,9 @@
             );
 
 
-        /* =========================
+        /* =====================================================
            BOTÃO RESETAR
-        ========================= */
+        ===================================================== */
 
         document
             .getElementById(
@@ -1529,9 +2275,9 @@
             );
 
 
-        /* =========================
+        /* =====================================================
            REDIMENSIONAR
-        ========================= */
+        ===================================================== */
 
         window.addEventListener(
             "resize",
@@ -1543,17 +2289,11 @@
         );
 
 
-        /* =========================
+        /* =====================================================
            INICIAR
-        ========================= */
+        ===================================================== */
 
         gerarLabirinto();
-
-
-        document.getElementById(
-            "mensagem"
-        ).textContent = "";
-
 
     </script>
 
